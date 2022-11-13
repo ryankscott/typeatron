@@ -15,7 +15,6 @@
     return x;
   })();
 
-
   mistakes.subscribe((m) => {
     allMistakes = m;
   });
@@ -48,8 +47,16 @@
   .container {
     padding: var(--size-6) var(--size-4);
   }
-  
-h4 {
- font-size: var(--scale-2)
-}
+
+  h4 {
+    font-size: var(--scale-2);
+  }
+
+  tbody:before {
+    content: '@';
+    display: block;
+    line-height: var(--size-1); 
+    text-indent: -99999px;
+  }
+
 </style>

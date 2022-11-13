@@ -2,27 +2,16 @@
   import { code } from './code.js';
   import { mistakes } from './store';
   import ThemeSwitcher from './ThemeSwitcher.svelte';
-  let currentIndex = 11;
-  //let cheatCode: string[] = [];
+  let currentIndex = 24;
   $: typedCode = code.slice(0, currentIndex);
   $: charAtCursor = code[currentIndex];
   $: remainingCode = code.slice(currentIndex + 1, code.length);
 
   function handleKeyPress(e: KeyboardEvent): void {
-    let char = e.key;
-
-    // queue structure: keep latest 5 key presses
-    // if (cheatCode.length > 4) {
-    //   [, ...cheatCode] = cheatCode;
-    // }
-    // cheatCode = [...cheatCode, char];
-    // // check cheat
-    // if (cheatCode.toString() === 'i,d,d,q,d') {
-    //   currentIndex += 10;
-    // }
-    //
     e.stopPropagation();
     e.preventDefault();
+    let char = e.key;
+
     if (char == charAtCursor || (char == 'Enter' && charAtCursor == '\n')) {
       currentIndex += 1;
     } else {
@@ -35,10 +24,8 @@
   <div class='theme-container'>
   <ThemeSwitcher />
   </div>
-  <div on:keyup={handleKeyPress} tabindex="0" class="code">
-    <span class="completed">{typedCode}</span><span class="cursor">{charAtCursor}</span><span
-      class="uncompleted">{remainingCode}</span
-    >
+  <div on:keyup={handleKeyPress} on:keydown={handleKeyPress} tabindex="0" class="code">
+    <span class="completed">{typedCode}</span><span class="cursor">{charAtCursor}</span><span class="uncompleted">{remainingCode}</span>
   </div>
 </main>
 
@@ -50,13 +37,16 @@
     padding: var(--size-2) var(--size-6);
     font-size: var(--scale-00);
     text-align: start;
-    font-family: var(--font-mono) 
+    font-family: var(--font-mono)
   }
   .completed {
     opacity: 0.3;
     white-space: pre;
   }
   .cursor {
+    display: inline-block;
+    min-width: var(--size-2);
+    white-space: pre;
     background-color: var(--color-blue-300);
   }
   .uncompleted {
