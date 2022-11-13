@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+  <style>
+    :root {
+      --color-bg: white;
+      --color-text: var(--color-black);
+      font-family: var(--font-sans);
+    }
+
+    :root[data-theme='dark'] {
+      --color-bg: var(--color-black);
+      --color-text: white;
+      font-family: var(--font-sans);
+    }
+    body {
+      margin: 0px;
+    }
+  </style>
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" href="%sveltekit.assets%/favicon.png" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="stylesheet" href="https://unpkg.com/pollen-css" />
+    %sveltekit.head%
+  </head>
+  <body>
+    <div>%sveltekit.body%</div>
+  </body>
+</html>
